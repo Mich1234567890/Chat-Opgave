@@ -5,10 +5,13 @@ const path = require("path");
 const app = express();
 
 // SETUP
+app.set('view engine', 'pug')
 
 // MIDDLEWARE
 
+
 //ROUTES
+
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
