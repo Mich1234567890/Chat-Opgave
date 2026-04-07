@@ -14,4 +14,4 @@ class Chat {
     }
 }
 
-export default chat
+export default Chat

@@ -22,4 +22,4 @@ function getMessagesByUserId(userId){
     return messages.filter(u => u.userId == userId)
 }
 
-export default Message
+export {Message, getMessagesByChatId, getMessagesByChatId}
