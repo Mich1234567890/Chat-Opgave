@@ -1,0 +1,20 @@
+html
+    head 
+        title forside
+
+        link(rel="stylesheet", href="/css/styles.css")
+        script(src="/js/submit.js" defer) 
+    body 
+        p Tillykke - du er nu logget ind med #{isItAValidUser.numberOfCats} katte
+        p her kan du 
+            a(href='/users/logout') logge ud
+        p her kan du se 
+            a(href='/') forsiden
+        form(action="/users/adduser", method="post")
+            input(type="text", name="username", id="username", placeholder="brugernavn")
+            input(type="password", name="password", id="password", placeholder="kodeord")
+            input(type="number", name="numberOfCats", id="numberOfCats", placeholder="Antal katte")
+            button(type="submit", id="createuserbtn")
+                strong Opret 
+                | bruger
+        div 
