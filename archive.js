@@ -2,13 +2,18 @@ import fs from "fs/promises"
 
 class Archive {
 
+        // write-queue beskyttelse - sikre at folk ikke korruptere rummet ved at sende beskeder samtidig. Tag den Mikkel. 
+    static #writeQueue = Promise.resolve();
 
     static async writeFile(file, content) {
-        try {
-            await fs.writeFile(file, content)
-        } catch (error) {
-            console.error(error)
-        }
+        Archive.#writeQueue = Archive.#writeQueue.then(async()=> {
+            try {
+                await fs.writeFile(file, content);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+        return Archive.#writeQueue;
     }
 
 
@@ -31,6 +36,7 @@ class Archive {
             return false
         }
     }
+
 }
 
 export default Archive
