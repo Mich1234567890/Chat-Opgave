@@ -22,4 +22,5 @@ function getMessagesByUserId(userId){
     return messages.filter(u => u.userId == userId)
 }
 
-export {Message, getMessagesByChatId, getMessagesByChatId}
+
+export {Message, getMessagesByChatId, getMessagesByUserId}
