@@ -19,4 +19,10 @@ userRouter.post('/adduser', async (req, res) => {
     res.redirect('/users/login')
 })
 
+// GET alle users
+userRouter.get('/', UserController.getAllUsers)
+
+// GET user by id
+userRouter.get('/:id', UserController.getUserById)
+
 export default userRouter

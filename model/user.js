@@ -1,6 +1,6 @@
 class User {
-static id = 1
-    
+    static id = 1
+
     constructor(username, password) {
         this.id = User.id++
         this.username = username

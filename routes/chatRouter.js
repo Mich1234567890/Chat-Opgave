@@ -1,6 +1,6 @@
 import express from 'express'
 import ChatController from "../controller/chatcontroller.js"
-import { getMessagesByChatId} from '../model/message.js'
+import { getMessagesByChatId } from '../model/message.js'
 
 const router = express.Router()
 
@@ -16,13 +16,15 @@ router.get('/:id/messages', (req, res) => {
     res.json(messages)
 })
 
-router.get('/:chatId/messages/:id', (req,res) => {
+router.post('/:id/messages', ChatController.createMessage)
+
+router.get('/:chatId/messages/:id', (req, res) => {
     const chatId = Number(req.params.chatId)
     const messageId = Number(req.params.id)
 
     const messages = getMessagesByChatId(chatId)
 
-    const message = messages.find(m => m.id = messageId)
+    const message = messages.find(m => m.id === messageId)
 
     res.json(message)
 })

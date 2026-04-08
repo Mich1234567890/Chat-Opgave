@@ -66,6 +66,22 @@ class UserController {
     static getLogin(req, res) {
         res.render('login')
     }
+
+static getAllUsers(req, res) {
+    res.json(UserController.users)
+}
+
+static getUserById(req, res) {
+    const id = Number(req.params.id)
+
+    const user = UserController.users.find(u => u.id === id)
+
+    if (!user) {
+        return res.status(404).send("User not found")
+    }
+
+    res.json(user)
+}
 }
 
 export default UserController
