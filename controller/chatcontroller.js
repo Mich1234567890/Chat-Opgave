@@ -1,4 +1,4 @@
-import chat from "../model/chat.js"
+import Chat from "../model/chat.js"
 import Archive from "../archive.js"
 import UserController from "./usercontroller.js"
 
@@ -9,7 +9,7 @@ class ChatController {
     }
 
     static getChatById(request, response) {
-        const id = parseint(request.params.id)
+        const id = parseInt(request.params.id)
 
         const chat = UserController.chats.find(c => c.id === id)
 
@@ -46,8 +46,8 @@ class ChatController {
             chat => chat.id !== id
         )
 
-        await Archive.writeFile(
-            "./data/chats.json", JSON.stringify({users: UserController.users, chats: UserController.chats}, null, 2)
+        await Archive.writeFile("./data/chats.json", 
+            JSON.stringify({users: UserController.users, chats: UserController.chats}, null, 2)
         )
         response.send("Chat deleted")
     }
