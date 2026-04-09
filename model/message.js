@@ -1,6 +1,4 @@
-import chat from "./chat"
-
-const messages = []
+import UserController from "../controller/usercontroller.js"
 
 class Message {
     static id = 1
@@ -15,11 +13,12 @@ class Message {
 }
 
 function getMessagesByChatId(chatId){
-    return messages.filter(m => m.chatId == chatId)
+    const chat = UserController.chats.find(c => c.id === chatId)
+    return chat ? chat.messages : []
 }
 
 function getMessagesByUserId(userId){
-    return messages.filter(u => u.userId == userId)
+    return UserController.chats.flatMap(c => c.messages).filter(m => m.userId === userId)
 }
 
 export {Message, getMessagesByChatId, getMessagesByUserId}

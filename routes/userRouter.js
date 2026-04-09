@@ -14,8 +14,8 @@ userRouter.get('/logout', UserController.logout)
 
 // OPRET BRUGER
 userRouter.post('/adduser', async (req, res) => {
-    const { username, password } = req.body
-    await UserController.addUser(username, password)
+    const { username, password, level } = req.body
+    await UserController.addUser(username, password, level)
     res.redirect('/users/login')
 })
 

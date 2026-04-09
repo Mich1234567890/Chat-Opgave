@@ -6,6 +6,7 @@ class User {
         this.username = username
         this.password = password
         this.level = 1
+        this.createdAt = new Date()
     }
 }
 

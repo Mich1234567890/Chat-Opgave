@@ -10,11 +10,13 @@ class UserController {
         return UserController.users
     }
 
-    static async addUser(username, password) {
-        UserController.users.push(new User(username, password))
-        await Archive.writeFile("./data/chats.json",
-            JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2))
-    }
+    static async addUser(username, password, level) {
+    const user = new User(username, password)
+    user.level = Number(level)
+    UserController.users.push(user)
+    await Archive.writeFile("./data/chats.json",
+        JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2))
+}
 
     static async deleteUser(id) {
         UserController.users = UserController.users.filter(user => user.id != id)

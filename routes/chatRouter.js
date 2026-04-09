@@ -1,5 +1,6 @@
 import express from 'express'
 import ChatController from "../controller/chatcontroller.js"
+import UserController from "../controller/usercontroller.js"
 import { getMessagesByChatId } from '../model/message.js'
 
 const router = express.Router()
@@ -14,6 +15,18 @@ router.get('/:id/messages', (req, res) => {
     const messages = getMessagesByChatId(id)
 
     res.json(messages)
+})
+
+router.get('/:id/view', (req, res) => {
+    const id = Number(req.params.id)
+    const chat = UserController.chats.find(c => c.id === id)
+
+    if (!chat) {
+        return res.status(404).send("Chat not found")
+    }
+
+    const user = req.session.user
+    res.render('chat', { chat, user })
 })
 
 router.post('/:id/messages', ChatController.createMessage)

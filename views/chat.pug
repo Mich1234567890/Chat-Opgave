@@ -1,0 +1,15 @@
+html
+    head
+        title #{chat.name}
+        link(rel="stylesheet", href="/css/styles.css")
+    body
+        h1 #{chat.name}
+        a(href='/') Tilbage til forsiden
+
+        ul
+            each message in chat.messages
+                li #{message.text} - bruger #{message.userId}
+
+        form(action="/chats/" + chat.id + "/messages", method="post")
+            input(type="text", name="text", placeholder="skriv en besked")
+            button(type="submit") Send

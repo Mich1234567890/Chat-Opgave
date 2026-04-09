@@ -33,7 +33,7 @@ app.get('/', (request, response) => {
     if (!user) {
         response.redirect('/users/login')
     } else {
-        response.render('frontpage', { user })
+        response.render('frontpage', { user, chats: UserController.chats })
     }
 })
 

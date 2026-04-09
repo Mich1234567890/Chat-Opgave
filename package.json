@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "express": "^5.2.1",
     "express-session": "^1.19.0",
     "fs": "^0.0.1-security",
     "pug": "^3.0.4"

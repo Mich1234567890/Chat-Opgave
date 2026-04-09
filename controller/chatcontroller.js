@@ -40,7 +40,7 @@ class ChatController {
             JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
         )
 
-        response.json(newChat)
+        response.redirect('/')
     }
 
     static async deleteChat(request, response) {
@@ -91,7 +91,7 @@ class ChatController {
             JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
         )
 
-        res.json(newMessage)
+        res.redirect('/chats/' + chatId + '/view')
     }
 }
 
