@@ -2,11 +2,11 @@ import fs from "fs/promises"
 
 class Archive {
 
-        // write-queue beskyttelse - sikre at folk ikke korruptere rummet ved at sende beskeder samtidig. Tag den Mikkel. 
+    // write-queue beskyttelse - sikre at folk ikke korruptere rummet ved at sende beskeder samtidig. Tag den Mikkel. 
     static #writeQueue = Promise.resolve();
 
     static async writeFile(file, content) {
-        Archive.#writeQueue = Archive.#writeQueue.then(async()=> {
+        Archive.#writeQueue = Archive.#writeQueue.then(async () => {
             try {
                 await fs.writeFile(file, content);
             } catch (error) {

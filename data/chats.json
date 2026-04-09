@@ -5,99 +5,28 @@
       "username": "admin",
       "password": "admin",
       "level": 3,
-      "createdAt": "2026-01-01T00:00:00.000Z"
+      "createdAt": "2026-04-09T09:53:07.437Z"
     },
     {
       "id": 2,
-      "username": "Kenneth",
-      "password": "Kenneth",
-      "level": 3,
-      "createdAt": "2026-04-08T17:41:03.581Z"
+      "username": "arthur",
+      "password": "1234",
+      "level": 1,
+      "createdAt": "2026-04-09T09:55:42.301Z"
     },
     {
       "id": 3,
-      "username": "Arthur",
-      "password": "1234",
-      "level": 1,
-      "createdAt": "2026-04-09T07:29:37.237Z"
-    },
-    {
-      "id": 4,
-      "username": "mich",
-      "password": "1234",
+      "username": "mikkel",
+      "password": "12345",
       "level": 2,
-      "createdAt": "2026-04-09T09:15:48.618Z"
+      "createdAt": "2026-04-09T09:55:48.567Z"
     }
   ],
   "chats": [
     {
       "id": 1,
-      "name": "Første chatrum",
-      "createdAt": "2026-04-08T17:50:25.585Z",
-      "userId": 2,
-      "messages": [
-        {
-          "id": 1775671447585,
-          "text": "Hej",
-          "userId": 1,
-          "chatId": 1,
-          "createdAt": "2026-04-08T18:04:07.585Z"
-        },
-        {
-          "id": 1775719720110,
-          "text": "hej",
-          "userId": 1,
-          "chatId": 1,
-          "createdAt": "2026-04-09T07:28:40.110Z"
-        },
-        {
-          "id": 1775719941667,
-          "text": "hey",
-          "userId": 3,
-          "chatId": 1,
-          "createdAt": "2026-04-09T07:32:21.667Z"
-        },
-        {
-          "id": 1775720885529,
-          "text": "yippie",
-          "userId": 3,
-          "chatId": 1,
-          "createdAt": "2026-04-09T07:48:05.529Z"
-        },
-        {
-          "id": 1775721108133,
-          "text": "hallo",
-          "userId": 3,
-          "chatId": 1,
-          "createdAt": "2026-04-09T07:51:48.133Z"
-        },
-        {
-          "id": 1775721495916,
-          "text": "hallo",
-          "userId": 3,
-          "chatId": 1,
-          "createdAt": "2026-04-09T07:58:15.916Z"
-        },
-        {
-          "id": 1775722388157,
-          "text": "hallo",
-          "userId": 3,
-          "chatId": 1,
-          "createdAt": "2026-04-09T08:13:08.157Z"
-        }
-      ]
-    },
-    {
-      "id": 1,
-      "name": "Dope",
-      "createdAt": "2026-04-08T17:53:01.578Z",
-      "userId": 2,
-      "messages": []
-    },
-    {
-      "id": 1,
-      "name": "Penis",
-      "createdAt": "2026-04-09T07:13:23.138Z",
+      "name": "q",
+      "createdAt": "2026-04-09T09:58:11.947Z",
       "userId": 1,
       "messages": []
     }

@@ -3,7 +3,7 @@ import Archive from "../archive.js"
 const FIL = 'data/chats.json'
 
 class Chat {
-    static id = 1
+    static id = 0
 
     constructor(name, userId) {
         this.id = Chat.id++

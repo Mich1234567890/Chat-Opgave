@@ -30,15 +30,12 @@ router.get('/:id/messages', (req, res) => {
 })
 
 router.get('/:id/view', (req, res) => {
-    const id = Number(req.params.id)
-    const chat = UserController.chats.find(c => c.id === id)
+    const chatId = Number(req.params.id)
 
-    if (!chat) {
-        return res.status(404).send("Chat not found")
-    }
+    const chat = UserController.chats.find(c => c.id === chatId)
 
     res.render('chat', {
-        chat,
+        chat: chat,
         users: UserController.users
     })
 })

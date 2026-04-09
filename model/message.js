@@ -12,13 +12,13 @@ class Message {
     }
 }
 
-function getMessagesByChatId(chatId){
-    const chat = UserController.chats.find(c => c.id === chatId)
+function getMessagesByChatId(chatId) {
+    const chat = UserController.chats.find(c => c.id === Number(chatId))
     return chat ? chat.messages : []
 }
 
-function getMessagesByUserId(userId){
+function getMessagesByUserId(userId) {
     return UserController.chats.flatMap(c => c.messages).filter(m => m.userId === userId)
 }
 
-export {Message, getMessagesByChatId, getMessagesByUserId}
+export { Message, getMessagesByChatId, getMessagesByUserId }

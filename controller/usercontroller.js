@@ -1,5 +1,7 @@
 import User from "../model/user.js"
 import Archive from "../archive.js"
+import Chat from '../model/chat.js'
+import { Message } from '../model/message.js'
 
 class UserController {
     static users = []
@@ -11,12 +13,12 @@ class UserController {
     }
 
     static async addUser(username, password, level) {
-    const user = new User(username, password)
-    user.level = Number(level)
-    UserController.users.push(user)
-    await Archive.writeFile("./data/chats.json",
-        JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2))
-}
+        const user = new User(username, password)
+        user.level = Number(level)
+        UserController.users.push(user)
+        await Archive.writeFile("./data/chats.json",
+            JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2))
+    }
 
     static async deleteUser(id) {
         UserController.users = UserController.users.filter(user => user.id != id)
@@ -38,6 +40,14 @@ class UserController {
             }, 0)
 
             User.id = biggestID + 1
+
+
+            Chat.id = Math.max(...this.chats.map(c => c.id), 0) + 1
+
+            Message.id = Math.max(
+                ...this.chats.flatMap(c => c.messages).map(m => m.id),
+                0
+            ) + 1
         }
     }
 
@@ -69,37 +79,37 @@ class UserController {
         res.render('login')
     }
 
-static getAllUsers(req, res) {
-    res.json(UserController.users)
-}
-
-static getUserById(req, res) {
-    const id = Number(req.params.id)
-
-    const user = UserController.users.find(u => u.id === id)
-
-    if (!user) {
-        return res.status(404).send("User not found")
+    static getAllUsers(req, res) {
+        res.json(UserController.users)
     }
 
-    res.json(user)
-}
+    static getUserById(req, res) {
+        const id = Number(req.params.id)
 
-static getUserMessages(req, res) {
-    const userId = Number(req.params.id)
+        const user = UserController.users.find(u => u.id === id)
 
-    const messages = []
+        if (!user) {
+            return res.status(404).send("User not found")
+        }
 
-    UserController.chats.forEach(chat => {
-        chat.messages.forEach(message => {
-            if (message.userId === userId) {
-                messages.push(message)
-            }
+        res.json(user)
+    }
+
+    static getUserMessages(req, res) {
+        const userId = Number(req.params.id)
+
+        const messages = []
+
+        UserController.chats.forEach(chat => {
+            chat.messages.forEach(message => {
+                if (message.userId === userId) {
+                    messages.push(message)
+                }
+            })
         })
-    })
 
-    res.json(messages)
-}
+        res.json(messages)
+    }
 }
 
 export default UserController

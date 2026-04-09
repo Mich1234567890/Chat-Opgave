@@ -101,6 +101,41 @@ class ChatController {
 
         res.redirect('/chats/' + chatId + '/view')
     }
+
+    static async updateChat(request, response) {
+        const user = request.session.user
+
+        if (!user) {
+            return response.status(401).send("Not logged in")
+        }
+
+        const id = parseInt(request.params.id)
+        const { name } = request.body
+
+        const chat = UserController.chats.find(c => c.id === id)
+
+        if (!chat) {
+            return response.status(404).send("Chat not found")
+        }
+
+        if (user.level === 1) {
+            return response.status(403).send("No permission")
+        }
+
+        if (user.level === 2 && chat.ownerId !== user.id) {
+            return response.status(403).send("You can only edit your own chats")
+        }
+
+        chat.name = name
+
+        await Archive.writeFile(
+            "./data/chats.json",
+            JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
+        )
+
+        response.redirect('/')
+    }
+
 }
 
 export default ChatController
