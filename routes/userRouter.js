@@ -22,6 +22,8 @@ userRouter.post('/adduser', async (req, res) => {
 // GET alle users
 userRouter.get('/', UserController.getAllUsers)
 
+userRouter.get('/:id/messages', UserController.getUserMessages)
+
 // GET user by id
 userRouter.get('/:id', UserController.getUserById)
 

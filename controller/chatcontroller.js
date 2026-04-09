@@ -22,6 +22,9 @@ class ChatController {
 
     static async createChat(request, response) {
         const { name } = request.body
+        if (!name) {
+            return response.status(400).send("Missing name")
+        }
         const user = request.session.user
 
         if (user.level < 2) {
@@ -43,23 +46,28 @@ class ChatController {
         response.redirect('/')
     }
 
-    static async deleteChat(request, response) {
-        const user = request.session.user
+    static async deleteChat(req, res) {
+        const id = Number(req.params.id)
+        const user = req.session.user
 
-        if (!user || user.level < 3) {
-            return response.status(403).send("No permission")
+        const chat = UserController.chats.find(c => c.id === id)
+
+        if (!chat) {
+            return res.status(404).send("Chat not found")
         }
 
-        const id = parseInt(request.params.id)
+        if (user.level === 3 || (user.level === 2 && chat.userId === user.id)) {
 
-        UserController.chats = UserController.chats.filter(
-            chat => chat.id !== id
-        )
+            UserController.chats = UserController.chats.filter(c => c.id !== id)
 
-        await Archive.writeFile("./data/chats.json",
-            JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
-        )
-        response.send("Chat deleted")
+            await Archive.writeFile("./data/chats.json",
+                JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
+            )
+
+            return res.redirect('/')
+        }
+
+        return res.status(403).send("No permission")
     }
 
     static async createMessage(req, res) {

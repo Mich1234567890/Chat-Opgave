@@ -84,6 +84,22 @@ static getUserById(req, res) {
 
     res.json(user)
 }
+
+static getUserMessages(req, res) {
+    const userId = Number(req.params.id)
+
+    const messages = []
+
+    UserController.chats.forEach(chat => {
+        chat.messages.forEach(message => {
+            if (message.userId === userId) {
+                messages.push(message)
+            }
+        })
+    })
+
+    res.json(messages)
+}
 }
 
 export default UserController

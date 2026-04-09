@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f0f1a;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+h1,
+h2,
+h3 {
+    background: linear-gradient(90deg, #ff6ec7, #a855f7, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: #a855f7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #ff6ec7;
+}
+
+ul {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+ul li {
+    background: #1e1e2e;
+    border-left: 4px solid #a855f7;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0 8px 8px 0;
+    transition: border-color 0.2s;
+}
+
+ul li:hover {
+    border-color: #ff6ec7;
+}
+
+ul li a {
+    font-weight: normal;
+}
+
+form {
+    background: #1e1e2e;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+    border: 1px solid #2e2e4e;
+}
+
+input {
+    background: #0f0f1a;
+    border: 1px solid #3b82f6;
+    color: #ffffff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #a855f7;
+}
+
+button {
+    background: linear-gradient(90deg, #a855f7, #3b82f6);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+p {
+    margin-bottom: 0.5rem;
+    color: #a0a0b0;
+}

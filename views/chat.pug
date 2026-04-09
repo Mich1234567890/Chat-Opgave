@@ -8,8 +8,10 @@ html
 
         ul
             each message in chat.messages
-                li #{message.text} - bruger #{message.userId}
+                li
+                    - const user = users.find(u => u.id === message.userId)
+                    | #{message.text} - #{user ? user.username : 'Ukendt'}
 
         form(action="/chats/" + chat.id + "/messages", method="post")
             input(type="text", name="text", placeholder="skriv en besked")
-            button(type="submit") Send
+            button(type="submit") Send 
