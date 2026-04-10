@@ -46,8 +46,8 @@ router.get('/:id', ChatController.getChatById)
 
 router.delete('/:id', ChatController.deleteChat)
 
-router.post('/:id/update', ChatController.updateChat)
+//router.post('/:id/update', ChatController.updateChat)
 
-router.post('/:id/delete', ChatController.deleteChat)
+//router.post('/:id/delete', ChatController.deleteChat)
 
 export default router

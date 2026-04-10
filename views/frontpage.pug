@@ -20,8 +20,7 @@ html
                             input(type="text", name="name", placeholder="nyt navn")
                             button(type="submit") Gem
 
-                        form(action="/chats/" + chat.id + "/delete", method="post", style="display:inline")
-                            button(type="submit") Slet
+                        button.delete-btn(data-id=chat.id) Slet
 
         if user.level >= 2
             h3 Opret chat

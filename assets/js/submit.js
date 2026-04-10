@@ -14,3 +14,19 @@ async function loadMessages() {
 }
 
 loadMessages()
+
+const buttons = document.querySelectorAll('.delete-btn')
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', async () => {
+        console.log("Klik")
+        const id = btn.dataset.id
+        
+        const response = await fetch(`/chats/${id}`,{
+            metode: 'delete'
+        })
+        if (response.ok) {
+            btn.parentElement.remove()
+        }
+    })
+});
