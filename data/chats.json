@@ -22,13 +22,5 @@
       "createdAt": "2026-04-09T09:55:48.567Z"
     }
   ],
-  "chats": [
-    {
-      "id": 1,
-      "name": "q",
-      "createdAt": "2026-04-09T09:58:11.947Z",
-      "userId": 1,
-      "messages": []
-    }
-  ]
+  "chats": []
 }

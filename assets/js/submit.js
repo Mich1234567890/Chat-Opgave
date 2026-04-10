@@ -4,6 +4,8 @@ async function loadMessages() {
 
     const div = document.querySelector('div')
 
+    if(!div) return
+
     div.innerHTML = ""
 
     messages.forEach(m => {
@@ -21,10 +23,14 @@ buttons.forEach(btn => {
     btn.addEventListener('click', async () => {
         console.log("Klik")
         const id = btn.dataset.id
+
+        console.log("før fetch")
         
-        const response = await fetch(`/chats/${id}`,{
-            metode: 'delete'
-        })
+        const response = await fetch(`http://localhost:8000/chats/${id}`, {
+    method: 'DELETE'
+})
+
+        console.log("efter fetch", response.status)
         if (response.ok) {
             btn.parentElement.remove()
         }

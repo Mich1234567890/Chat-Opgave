@@ -42,9 +42,9 @@ router.get('/:id/view', (req, res) => {
 
 router.post('/:id/messages', ChatController.createMessage)
 
-router.get('/:id', ChatController.getChatById)
-
 router.delete('/:id', ChatController.deleteChat)
+
+router.get('/:id', ChatController.getChatById)
 
 //router.post('/:id/update', ChatController.updateChat)
 

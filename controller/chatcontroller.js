@@ -47,6 +47,7 @@ class ChatController {
     }
 
     static async deleteChat(req, res) {
+        console.log("🔥 DELETE ROUTE RAMT 🔥")
         const id = Number(req.params.id)
         const user = req.session.user
 
@@ -56,15 +57,22 @@ class ChatController {
             return res.status(404).send("Chat not found")
         }
 
-        if (user.level === 3 || (user.level === 2 && chat.userId === user.id)) {
+        if (user.level === 3 || (user.level === 2 && chat.ownerId === user.id)) {
 
-            UserController.chats = UserController.chats.filter(c => c.id !== id)
+            console.log("SLETTER ID:", id)
+            console.log("ALLE IDS:", UserController.chats.map(c => c.id))
+
+            console.log("FØR:", UserController.chats.map(c => c.id))
+
+            UserController.chats = UserController.chats.filter(c => Number(c.id) !== id)
+
+             UserController.chats = UserController.chats.filter(c => c.id !== id)
 
             await Archive.writeFile("./data/chats.json",
                 JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
             )
 
-            return res.redirect('/')
+            return res.status(200).json({ message: "deleted" })
         }
 
         return res.status(403).send("No permission")
