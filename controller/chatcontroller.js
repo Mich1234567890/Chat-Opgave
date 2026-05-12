@@ -20,19 +20,17 @@ class ChatController {
         response.json(chat)
     }
 
-    static async createChat(request, response) {
-        const { name } = request.body
-        if (!name) {
-            return response.status(400).send("Missing name")
+    static async createChat(name, user, res) {
+        if (!user) {
+            return res.status(401).send("Not logged in")
         }
-        const user = request.session.user
+
+        if (!name) {
+            return res.status(400).send("Missing name")
+        }
 
         if (user.level < 2) {
-            return response.status(403).send("No permission")
-        }
-
-        if (!user) {
-            return response.status(401).send("Not logged in")
+            return res.status(403).send("No permission")
         }
 
         const newChat = new Chat(name, user.id)
@@ -43,34 +41,32 @@ class ChatController {
             JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
         )
 
-        response.redirect('/')
+        res.redirect('/')
     }
 
-    static async deleteChat(req, res) {
-        console.log("🔥 DELETE ROUTE RAMT 🔥")
-        const id = Number(req.params.id)
-        const user = req.session.user
+    static async deleteChat(id, user, res) {
+        console.log("id fra params:", id, typeof id)
+        console.log("chats ids:", UserController.chats.map(c => ({ id: c.id, type: typeof c.id })))
 
         const chat = UserController.chats.find(c => c.id === id)
+        console.log("fundet chat", chat);
+        console.log("User:", user);
+
 
         if (!chat) {
             return res.status(404).send("Chat not found")
         }
 
         if (user.level === 3 || (user.level === 2 && chat.ownerId === user.id)) {
+            console.log("har rettigheder - sletter nu");
 
-            console.log("SLETTER ID:", id)
-            console.log("ALLE IDS:", UserController.chats.map(c => c.id))
 
-            console.log("FØR:", UserController.chats.map(c => c.id))
-
-            UserController.chats = UserController.chats.filter(c => Number(c.id) !== id)
-
-             UserController.chats = UserController.chats.filter(c => c.id !== id)
+            UserController.chats = UserController.chats.filter(c => c.id !== id)
 
             await Archive.writeFile("./data/chats.json",
                 JSON.stringify({ users: UserController.users, chats: UserController.chats }, null, 2)
             )
+            console.log("fil gemt - redirecter nu");
 
             return res.status(200).json({ message: "deleted" })
         }
@@ -78,10 +74,7 @@ class ChatController {
         return res.status(403).send("No permission")
     }
 
-    static async createMessage(req, res) {
-        const chatId = Number(req.params.id)
-        const { text } = req.body
-        const user = req.session.user
+    static async createMessage(chatId, text, user, res) {
 
         if (!user) {
             return res.status(401).send("Not logged in")

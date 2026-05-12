@@ -1,3 +1,4 @@
+/*
 async function loadMessages() {
     const response = await fetch('/chats/1/messages')
     const messages = await response.json()
@@ -16,6 +17,7 @@ async function loadMessages() {
 }
 
 loadMessages()
+*/
 
 const buttons = document.querySelectorAll('.delete-btn')
 
@@ -25,14 +27,16 @@ buttons.forEach(btn => {
         const id = btn.dataset.id
 
         console.log("før fetch")
-        
+
         const response = await fetch(`http://localhost:8000/chats/${id}`, {
-    method: 'DELETE'
-})
+            method: 'DELETE'
+        })
+        console.log("Status", response.status);
+
 
         console.log("efter fetch", response.status)
         if (response.ok) {
-            btn.parentElement.remove()
+            window.location.href ='/'
         }
     })
 });

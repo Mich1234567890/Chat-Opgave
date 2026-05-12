@@ -6,7 +6,11 @@ const router = express.Router()
 
 router.get('/', ChatController.getAllChats)
 
-router.post('/', ChatController.createChat)
+router.post('/', (req, res) => {
+    const name = req.body.name
+    const user = req.session.user
+    ChatController.createChat(name, user, res)
+})
 
 router.get('/:id/messages', (req, res) => {
     const id = Number(req.params.id)
@@ -40,9 +44,18 @@ router.get('/:id/view', (req, res) => {
     })
 })
 
-router.post('/:id/messages', ChatController.createMessage)
+router.post('/:id/messages', (req, res) => {
+    const chatid = Number(req.params.id)
+    const {text} = req.body
+    const user = req.session.user
+    ChatController.createMessage(chatid, text, user, res)
+})
 
-router.delete('/:id', ChatController.deleteChat)
+router.delete('/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const user = req.session.user
+    ChatController.deleteChat(id, user,res)
+})
 
 router.get('/:id', ChatController.getChatById)
 
